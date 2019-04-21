@@ -2,24 +2,10 @@ from kivy.app import App
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 import kivy
-import mysql.connector
+from App import DbCon
 from kivy.core.window import Window
 
 Window.clearcolor = kivy.utils.get_color_from_hex('#808080')
-class DbCon:
-
-    def __init__(self):
-        self.db = mysql.connector.connect(
-                          host="localhost",
-                          user="lal",
-                          password="949510",
-                          database= 'bookstall'
-                        )
-        self.c = self.db.cursor()
-
-    def get_user(self):
-        self.c.execute("SELECT * FROM user")
-        return self.c.fetchall()
 
 class Home(Screen):
     def disconnect(self):
@@ -33,13 +19,16 @@ class Login(Screen):
 
         app.username = loginText
         app.password = passwordText
-        self.db = DbCon()
-        print(self.db.get_user())
-        print(app.username) 
-        print(app.password)
+        self.db = DbCon.DbCon()
+        if self.db.get_user_ac(app.username,app.password) :
 
-        self.manager.transition = SlideTransition(direction="left")
-        self.manager.current = 'connected'
+            print(app.username)
+            print(app.password)
+
+            self.manager.transition = SlideTransition(direction="left")
+            self.manager.current = 'connected'
+        else:
+            print("Wrong")
 
 
     def resetForm(self):
