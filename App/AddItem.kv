@@ -1,0 +1,25 @@
+<AddItem>:
+	id:"AddItem"
+	BoxLayout:
+		id:form
+		orientation:'vertical'
+		spacing:10
+		padding_left:60
+		padding: [50,50,50,50]
+		Label:
+			hint_text: "Hi "+str(app.username)
+			font_size: 50
+		TextInput:
+			id:ne
+			hint_text:'Hello world'
+			multiline:False
+			write_tab: False
+			font_size: 28	
+		
+		Button:
+			on_release:root.submit_details(ne.text)
+			
+			
+	
+			
+			

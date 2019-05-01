@@ -1,15 +1,45 @@
 
+
+
 <Home>:
+	GridLayout:
+		cols:3
+		BoxLayout:
+			orientation: 'vertical'
+
+			Label:
+				text: "You are now connected - "+str(app.username)
+				font_size: 20
+			Button:
+				text: "Logout"
+				font_size: 24
+				on_release: root.disconnect()
+		BoxLayout:
+			orientation: 'vertical'
+
+			
+			Button:
+				backgroundcolor:[0,0,1,0]
+				text: "Inventory"
+				font_size: 24
+				on_release: root.manager.current="AddItem"
+			Button:
+				backgroundcolor:[0,0,1,0]
+				text: "Sale"
+				font_size: 24
+				on_release: root.disconnect()
+
+<LoginError>:
     BoxLayout:
         orientation: 'vertical'
 
         Label:
-            text: "You are now connected"
+            text: "Password & UserName mismatch"
             font_size: 32
         Button:
-            text: "Disconnect"
+            text: "Back"
             font_size: 24
-            on_release: root.disconnect()
+            on_release: root.back()
 <Login>:
 	GridLayout:
 		cols:2
@@ -38,6 +68,7 @@
 				TextInput:
 					id: login
 					multiline:False
+					write_tab: False
 					font_size: 28
 
 			BoxLayout:
@@ -51,6 +82,7 @@
 				TextInput:
 					id: password
 					multiline:False
+					write_tab: False
 					password:True
 					font_size: 28
 

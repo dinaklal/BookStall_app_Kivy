@@ -1,17 +1,17 @@
 from kivy.app import App
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
+from kivy.uix.tabbedpanel import TabbedPanel
 import kivy
 from App import DbCon
 from kivy.core.window import Window
-
+from App import home
+from kivy.lang import Builder
+Builder.load_file('login.kv')
+Builder.load_file('AddItem.kv')
 Window.clearcolor = kivy.utils.get_color_from_hex('#808080')
 
-class Home(Screen):
-    def disconnect(self):
-        self.manager.transition = SlideTransition(direction="right")
-        self.manager.current = 'login'
-        self.manager.get_screen('login').resetForm()
+
 
 class Login(Screen):
     def do_login(self, loginText, passwordText):
@@ -28,7 +28,8 @@ class Login(Screen):
             self.manager.transition = SlideTransition(direction="left")
             self.manager.current = 'connected'
         else:
-            print("Wrong")
+            self.manager.transition = SlideTransition(direction="left")
+            self.manager.current = 'error'
 
 
     def resetForm(self):
@@ -43,7 +44,9 @@ class LoginApp(App):
         manager = ScreenManager()
 
         manager.add_widget(Login(name='login'))
-        manager.add_widget(Home(name='connected'))
+        manager.add_widget(home.Home(name='connected'))
+        manager.add_widget(home.LoginError(name='error'))
+        manager.add_widget(home.AddItem(name="AddItem"))
 
         return manager
 
