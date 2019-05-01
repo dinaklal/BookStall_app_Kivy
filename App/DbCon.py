@@ -16,3 +16,6 @@ class DbCon:
     def get_user_ac(self,username,password):
         self.c.execute("SELECT * FROM user where user ='"+username+ "' and password ='"+ password+"'")
         return self.c.fetchall()
+    def get_gst(self):
+        self.c.execute("SELECT gstclass FROM gst")
+        return self.c.fetchall()

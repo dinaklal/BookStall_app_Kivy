@@ -1,5 +1,5 @@
 from kivy.app import App
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty,OptionProperty,ListProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.uix.tabbedpanel import TabbedPanel
 import kivy
@@ -19,7 +19,14 @@ class Login(Screen):
 
         app.username = loginText
         app.password = passwordText
+
         self.db = DbCon.DbCon()
+        res = self.db.get_gst()
+        app.gst={}
+        for row in res:
+            print (row[0])
+            app.gst.append(row[0])
+
         if self.db.get_user_ac(app.username,app.password) :
 
             print(app.username)
@@ -39,6 +46,7 @@ class Login(Screen):
 class LoginApp(App):
     username = StringProperty(None)
     password = StringProperty(None)
+    gst =  ListProperty(None)
 
     def build(self):
         manager = ScreenManager()

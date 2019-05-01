@@ -68,6 +68,7 @@
 				TextInput:
 					id: login
 					multiline:False
+					on_text_validate:password.focus=True
 					write_tab: False
 					font_size: 28
 
@@ -83,6 +84,7 @@
 					id: password
 					multiline:False
 					write_tab: False
+					on_text_validate:root.do_login(login.text, password.text)
 					password:True
 					font_size: 28
 

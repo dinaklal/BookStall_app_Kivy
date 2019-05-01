@@ -1,6 +1,8 @@
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.app import App
+from App import DbCon
 from kivy.uix.widget import Widget
+from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
 from kivy.properties import StringProperty
 class Home(Screen):
@@ -14,8 +16,9 @@ class LoginError(Screen):
         self.manager.current = 'login'
         self.manager.get_screen('login').resetForm()
 class AddItem(Screen):
-    na = StringProperty(None)
-    def submit_details(self,nam):
-        na=nam
-        print(nam)
+
+
+    def submit_details(self,item,price,qtty,gst):
+        app = App.get_running_app()
+        print(app.username + " "+ item+"  "+ " "+ price+" "+ qtty+" "+gst)
     pass

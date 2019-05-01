@@ -6,18 +6,48 @@
 		spacing:10
 		padding_left:60
 		padding: [50,50,50,50]
-		Label:
-			hint_text: "Hi "+str(app.username)
-			font_size: 50
-		TextInput:
-			id:ne
-			hint_text:'Hello world'
-			multiline:False
-			write_tab: False
-			font_size: 28	
-		
-		Button:
-			on_release:root.submit_details(ne.text)
+		BoxLayout:
+			padding: [50,50,50,50]
+			orientation: 'vertical'
+			TextInput:
+				id:item
+				hint_text:'Item Name'
+				multiline:False
+				write_tab: False
+				font_size: 28	
+				on_text_validate:price.focus=True
+			TextInput:
+				id:price
+				hint_text:'Price'
+				multiline:False
+				write_tab: False
+				font_size: 28	
+				on_text_validate:qtty.focus=True
+			TextInput:
+				id:qtty
+				hint_text:'Quantity'
+				multiline:False
+				write_tab: False
+				font_size: 28	
+				on_text_validate:
+					submit.focus=True
+					root.submit_details(item.text,price.text,qtty.text)
+			Spinner:
+				id:gst
+				
+				text: "GST Class"	
+				values : app.gst
+				size_hint: None, None
+			Spinner:
+				id:gst
+				
+				text: "GST Class"	
+				values : app.gst
+				size_hint: None, None
+			Button:
+				id:submit
+				text:"Submit"
+				on_release:root.submit_details(item.text,price.text,qtty.text,gst.text)
 			
 			
 	
