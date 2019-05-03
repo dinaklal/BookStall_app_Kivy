@@ -18,7 +18,10 @@ class LoginError(Screen):
 class AddItem(Screen):
 
 
-    def submit_details(self,item,price,qtty,gst):
+    def submit_details(self,item,price,qtty,gst,cat):
         app = App.get_running_app()
         print(app.username + " "+ item+"  "+ " "+ price+" "+ qtty+" "+gst)
+        self.db = DbCon.DbCon()
+        res= self.db.add_item(item,price,qtty,gst,cat,app.userid)
+        print(res)
     pass

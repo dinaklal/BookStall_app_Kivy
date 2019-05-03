@@ -32,22 +32,26 @@
 				on_text_validate:
 					submit.focus=True
 					root.submit_details(item.text,price.text,qtty.text)
-			Spinner:
-				id:gst
-				
-				text: "GST Class"	
-				values : app.gst
-				size_hint: None, None
-			Spinner:
-				id:gst
-				
-				text: "GST Class"	
-				values : app.gst
-				size_hint: None, None
+			BoxLayout:
+				orientation:'horizontal'
+				padding: [10,10,10,10]
+				Spinner:
+					id:gst
+					size: root.width/4,root.height/12	
+					text: "GST Class"	
+					values : app.gst
+					size_hint: None, None
+				Spinner:
+					id:category
+					size: root.width/4,root.height/12
+					pos_hint:{'center_x': .8}
+					text: "Category"	
+					values : app.cat
+					size_hint: None, None
 			Button:
 				id:submit
 				text:"Submit"
-				on_release:root.submit_details(item.text,price.text,qtty.text,gst.text)
+				on_release:root.submit_details(item.text,price.text,qtty.text,gst.text,category.text)
 			
 			
 	
