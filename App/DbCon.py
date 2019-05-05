@@ -14,7 +14,7 @@ class DbCon:
         self.c.execute("SELECT * FROM user")
         return self.c.fetchall()
     def get_user_ac(self,username,password):
-        self.c.execute("SELECT userid FROM user where user ='"+username+ "' and password ='"+ password+"'")
+        self.c.execute("SELECT userid FROM user where user ='"+str(username)+ "' and password ='"+str(password)+"'")
         return self.c.fetchall()
     def get_gst(self):
         self.c.execute("SELECT gstclass FROM gst")
@@ -33,10 +33,7 @@ class DbCon:
         r = self.c.fetchall()
         for row in r:
             gstid = row[0]
-        self.c.execute("select userid from user where user ='" + user + "' ")
-        r = self.c.fetchall()
-        for row in r:
-            userid = row[0]
-        self.c.execute("INSERT INTO item (item,description, categoryid,gstclass_id,addedby,price,quantity) VALUES ( '"+item+"','desc','"+str(catid)+"','"+str(gstid)+"','"+str(userid)+"',"+str(price)+","+str(qtty)+")")
+
+        self.c.execute("INSERT INTO item (item,description, categoryid,gstclass_id,addedby,price,quantity) VALUES ( '"+item+"','desc','"+str(catid)+"','"+str(gstid)+"','"+str(user)+"',"+str(price)+","+str(qtty)+")")
         return (self.db.commit())
 

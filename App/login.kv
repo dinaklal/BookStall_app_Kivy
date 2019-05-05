@@ -93,3 +93,13 @@
 				font_size: 24
 
 				on_release: root.do_login(login.text, password.text)
+<pop_Up>
+	Label:
+		text:root.tex
+		size_hint:0.6,0.2
+		pos_hint:{"x":0.2,"top":1}
+	Button:
+		id:button
+		text:"Close"
+		size_hint:0.8,0.2
+		pos_hint:{"x":0.1,"top":0.1}
