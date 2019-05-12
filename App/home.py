@@ -26,7 +26,8 @@ class AddItem(Screen):
         print(app.username + " "+ item+"  "+ " "+ price+" "+ qtty+" "+gst)
         self.db = DbCon.DbCon()
         res= self.db.add_item(item,price,qtty,gst,cat,app.userid)
-        show_pop(res)
+
+        show_pop()
         self.resetForm()
     def resetForm(self):
         self.ids['item'].text = ""
@@ -37,12 +38,12 @@ class AddItem(Screen):
 
 
 class pop_Up(FloatLayout):
-    tex="root"
+    tex="Item Added Successfully"
     pass
 
-def show_pop(text):
-    print(text)
-    show=pop_Up()
+def show_pop():
+    #print()
+    show = pop_Up()
 
     popUp_window = Popup(title="Popup Window",content=show,size_hint=(None,None),size=(400,400),auto_dismiss=False)
     show.ids.button.bind(on_press=popUp_window.dismiss)
